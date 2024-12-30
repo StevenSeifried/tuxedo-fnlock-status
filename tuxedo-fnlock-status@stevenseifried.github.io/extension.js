@@ -24,7 +24,7 @@ export default class FnLockExtension extends Extension {
     try {
       return GLib.file_get_contents(FN_LOCK_PATH)[1].toString().trim();
     } catch (e) {
-      logError(`Error reading fn_lock state: ${e}`);
+      console.error(`Error reading fn_lock state: ${e}`);
       return null;
     }
   }
@@ -34,7 +34,7 @@ export default class FnLockExtension extends Extension {
       GLib.file_set_contents(FN_LOCK_PATH, state);
       return true;
     } catch (e) {
-      logError(`Error writing fn_lock state: ${e}`);
+      console.error(`Error writing fn_lock state: ${e}`);
       return false;
     }
   }
@@ -51,7 +51,7 @@ export default class FnLockExtension extends Extension {
     }
     
     // Log the current state for debugging
-    log(`Current fn_lock state: ${state}`);
+    console.log(`Current fn_lock state: ${state}`);
   }
 
   switch_fnlock() {
@@ -59,12 +59,7 @@ export default class FnLockExtension extends Extension {
     if (currentState !== null) {
       const newState = currentState === "1" ? "0" : "1";
       if (this._writeFnLockState(newState)) {
-        log(`Switched fn_lock state to: ${newState}`);
-        // Add a small delay before updating the icon
-        GLib.timeout_add(GLib.PRIORITY_DEFAULT, 100, () => {
-          this.update_fnlock();
-          return GLib.SOURCE_REMOVE;
-        });
+        console.log(`Switched fn_lock state to: ${newState}`);
       }
     }
   }
@@ -105,7 +100,7 @@ export default class FnLockExtension extends Extension {
     const file = Gio.File.new_for_path(FN_LOCK_PATH);
     this._fileMonitor = file.monitor_file(Gio.FileMonitorFlags.NONE, null);
     this._fileMonitor.connect("changed", () => {
-      log("File monitor detected change");
+      console.log("File monitor detected change");
       this.update_fnlock();
     });
 
