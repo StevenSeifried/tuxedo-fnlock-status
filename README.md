@@ -1,5 +1,5 @@
-# TUXEDO FnLock state
-GNOME Shell Extension to display the FnLock state of TUXEDO devices
+# TUXEDO FnLock status
+GNOME Shell Extension to display the FnLock status of TUXEDO devices
 
 **Hint:** I'm a TUXEDO staff member, but this project is not affiliated to TUXEDO and/or not sponsored by TUXEDO. \
 It was created at my own intention.

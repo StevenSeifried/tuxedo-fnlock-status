@@ -1,9 +1,0 @@
-{
-  "description": "Show the FnLock state of TUXEDO devices",
-  "name": "TUXEDO FnLock state",
-  "shell-version": ["47"],
-  "url": "https://github.com/StevenSeifried/tuxedo-fnlock-state",
-  "uuid": "tuxedo-fnlock-state@stevenseifried.github.io",
-  "settings-schema": "org.gnome.shell.extensions.tuxedo-fnlock-state",
-  "version": 1
-}
