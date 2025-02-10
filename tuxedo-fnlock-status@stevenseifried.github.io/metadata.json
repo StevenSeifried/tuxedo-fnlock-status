@@ -1,9 +1,9 @@
 {
   "description": "Show the FnLock status of TUXEDO devices. This extension is not affiliated, funded, or in any way associated with TUXEDO. This extension is a fork of the 'FnLock switch (ThinkPad Compact USB Keyboard)' extension. tuxedo-drivers v4.0.0 or newer must be installed.",
   "name": "TUXEDO FnLock status",
-  "shell-version": ["47"],
+  "shell-version": ["46", "47", "48"],
   "url": "https://github.com/StevenSeifried/tuxedo-fnlock-status",
   "uuid": "tuxedo-fnlock-status@stevenseifried.github.io",
   "settings-schema": "org.gnome.shell.extensions.tuxedo-fnlock-status",
-  "version": 3
+  "version": 4
 }
