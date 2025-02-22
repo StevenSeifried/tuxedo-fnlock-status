@@ -12,11 +12,11 @@ const FNLOCKED_ICON = "fnlk.svg";
 const FNUNLOCKED_ICON = "fn.svg";
 const NOFNLOCK_ICON = "none.svg";
 const FN_LOCK_PATH = "/sys/devices/platform/tuxedo_keyboard/fn_lock";
+const CHECK_INTERVAL = 1000;
 
 export default class FnLockExtension extends Extension {
   constructor(metadata) {
     super(metadata);
-    this._fileMonitor = null;
     this._timeout = null;
   }
 
@@ -50,8 +50,8 @@ export default class FnLockExtension extends Extension {
       this._icon.set_gicon(this._gicon_none);
     }
     
-    // Log the current state for debugging
     console.log(`Current fn_lock state: ${state}`);
+    return true;
   }
 
   switch_fnlock() {
@@ -60,6 +60,7 @@ export default class FnLockExtension extends Extension {
       const newState = currentState === "1" ? "0" : "1";
       if (this._writeFnLockState(newState)) {
         console.log(`Switched fn_lock state to: ${newState}`);
+        this.update_fnlock();
       }
     }
   }
@@ -96,18 +97,8 @@ export default class FnLockExtension extends Extension {
       () => this.switch_fnlock()
     );
 
-    // Set up file monitor
-    const file = Gio.File.new_for_path(FN_LOCK_PATH);
-    this._fileMonitor = file.monitor_file(Gio.FileMonitorFlags.NONE, null);
-    this._fileMonitor.connect("changed", () => {
-      console.log("File monitor detected change");
-      this.update_fnlock();
-    });
-
-    // Set up periodic checking
-    this._timeout = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 5, () => {
-      this.update_fnlock();
-      return GLib.SOURCE_CONTINUE;
+    this._timeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, CHECK_INTERVAL, () => {
+      return this.update_fnlock();
     });
   }
 
@@ -122,14 +113,10 @@ export default class FnLockExtension extends Extension {
     this._gicon_none = null;
     this._settings = null;
 
-    if (this._fileMonitor) {
-      this._fileMonitor.cancel();
-      this._fileMonitor = null;
-    }
-
     if (this._timeout) {
       GLib.source_remove(this._timeout);
       this._timeout = null;
     }
   }
 }
+
