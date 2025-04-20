@@ -1,6 +1,9 @@
 # TUXEDO FnLock status
 GNOME Shell Extension to display the FnLock status of TUXEDO devices
 
+- extensions.gnome.org: https://extensions.gnome.org/extension/7701/tuxedo-fnlock-status/
+- Arch User Repository: https://aur.archlinux.org/packages/gnome-shell-extension-tuxedo-fnlock-status
+
 **Hint:** I'm a TUXEDO staff member, but this project is not affiliated to TUXEDO and/or not sponsored by TUXEDO. \
 It was created at my own intention.
 
