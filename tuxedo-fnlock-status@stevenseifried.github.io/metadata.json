@@ -5,5 +5,5 @@
   "url": "https://github.com/StevenSeifried/tuxedo-fnlock-status",
   "uuid": "tuxedo-fnlock-status@stevenseifried.github.io",
   "settings-schema": "org.gnome.shell.extensions.tuxedo-fnlock-status",
-  "version": 5
+  "version": 6
 }
